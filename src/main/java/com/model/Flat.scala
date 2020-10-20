@@ -4,7 +4,8 @@ import javax.persistence._
 
   @Entity
   @Table(name = "Flats")
-  case class Flat(id: Long,
+  case class Flat( @Id
+                   @GeneratedValue(strategy = GenerationType.IDENTITY)id: Long,
                             street: String,
                             status: String,
                             price: Long,

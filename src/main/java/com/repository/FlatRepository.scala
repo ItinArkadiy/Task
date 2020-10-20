@@ -4,7 +4,6 @@ import com.model.Flat
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
-@Repository
 trait FlatRepository extends JpaRepository[Flat, Long]{
 
 }
