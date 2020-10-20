@@ -4,7 +4,7 @@ import javax.persistence._
 
 @Entity
 @Table(name = "Flats")
-class Flat( idC: Long,
+case class Flat( idC: Long,
             streetC: String,
             statusC: String,
             priceC: Long,
