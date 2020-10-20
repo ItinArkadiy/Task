@@ -4,24 +4,35 @@ import javax.persistence._
 
 @Entity
 @Table(name = "Flats")
-class Flat(@Id var id: Long,
-           var street: String,
-           var status: String,
-           var price: Long,
-           var bedrooms: Int,
-           var bathrooms: Int,
-           var sq_ft: Int,
-           var lat: Double,
-           var lng: Double) {
+class Flat( idC: Long,
+            streetC: String,
+            statusC: String,
+            priceC: Long,
+            bedroomsC: Int,
+            bathroomsC: Int,
+            sq_ftC: Int,
+            latC: Double,
+            lngC: Double) {
 
-
+  @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  var id: Long = _
+  var id: Int = _
+
+  var street: String = streetC
+  var status: String = statusC
+  var price: Long = priceC
+  var bedrooms: Int = bedroomsC
+  var bathrooms: Int = bathroomsC
+  var sq_ft: Int = sq_ftC
+  var lat: Double = latC
+  var lng: Double = lngC
 
 
-
-  private def this() = this(0, null, null, 0, 0, 0, 0, 0, 0)
+  def this() = this(0, null, null, 0, 0, 0, 0, 0, 0)
 }
+
+
+
 
 
 
