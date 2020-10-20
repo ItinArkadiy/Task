@@ -1,7 +1,7 @@
 package com.service
 
-import com.repository.FlatRepository
 import com.model.Flat
+import com.repository.FlatRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,7 +14,7 @@ class MyService(flatRepository: FlatRepository) {
     try {
       val csv = Source.fromURL("https://server-assignment.s3.amazonaws.com/listing-details.csv").getLines.toList
       val res = csv.tail.map {
-        case s"$id,$street,$status,$price,$bedrooms,$bathrooms,$sq_ft,$lat,$lng" => Right(Flat(id.toLong,
+        case s"$id,$street,$status,$price,$bedrooms,$bathrooms,$sq_ft,$lat,$lng" => Right(new Flat(id.toLong,
           street,
           status,
           price.toLong,
