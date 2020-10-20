@@ -17,10 +17,10 @@ class TaskController(val myService: MyService) {
   def getFlats(@RequestParam(value = "page", defaultValue = "0") page: Int,
                @RequestParam(value = "pageSize", defaultValue = "100") pageSize: Int,
                @RequestParam(value = "status", defaultValue = "") status: String,
-               @RequestParam(value = "max", defaultValue = "0") max: Long,
+               @RequestParam(value = "max", defaultValue = "999999") max: Long,
                @RequestParam(value = "min", defaultValue = "0") min: Long,
-              ): Unit = {
-    println(myService getFlats(page, pageSize, status, max, min))
+              ): java.util.List[Flat] = {
+    myService getFlats(page, pageSize, status, max, min)
   }
 
 

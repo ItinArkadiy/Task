@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import scala.io.Source
+import scala.util.Using
 
 @Service
-@Transactional
 class MyService(flatRepository: FlatRepository) {
 
+  @Transactional
   def downloadData(): String = {
     try {
-      val csv = Source.fromURL("https://server-assignment.s3.amazonaws.com/listing-details.csv").getLines.toList
+      val csv = Source.fromURL("https://server-assignment.s3.amazonaws.com/listing-details.csv").getLines().toList
       val res = csv.tail.map {
         case s"$id,$street,$status,$price,$bedrooms,$bathrooms,$sq_ft,$lat,$lng" => Right(new Flat(id.toLong,
           street,
@@ -37,25 +38,17 @@ class MyService(flatRepository: FlatRepository) {
     }
   }
 
-  def getFlats(page: Int, pageSize: Int, status: String, max: Long, min: Long): Page[Flat]  = {
+  def getFlats(page: Int, pageSize: Int, status: String, max: Long, min: Long): java.util.List[Flat]  = {
     val pageable = PageRequest.of(page, pageSize)
-  //  if (status.length == 0){
-      val pageResult = flatRepository.findAll(pageable)
-      pageResult
-  //  }
+    if (status.length == 0){
+      val pageResult = flatRepository.findByPriceBetween(min, max, pageable)
+      println(pageResult.getContent)
+      println(pageResult)
+      pageResult.getContent
+    } else {
+      val pageResult = flatRepository.findByStatusAndPriceBetween(status, min, max, pageable)
+      pageResult.getContent
+    }
   }
-
-//  def getFlatsBetweenValue (page: Int, pageSize: Int, status: String, from : Long, to : Long): Unit = {
-//    val pageable = PageRequest.of(page, pageSize);
-//    flatRepository.findByPriceBetween(from, to, pageable)
-//  }
-//
-//
-//
-//  private def flatToJson(event: Flat):String = {
-//    val out = new StringWriter
-//    mapper.writeValue(out, event)
-//    out.toString
-//  }
 
 }
