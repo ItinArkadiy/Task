@@ -1,5 +1,6 @@
 package com.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence._
 
 @Entity
@@ -18,14 +19,23 @@ case class Flat( idC: Long,
   @GeneratedValue(strategy = GenerationType.AUTO)
   var id: Int = _
 
+  @JsonProperty
   var street: String = streetC
+  @JsonProperty
   var status: String = statusC
+  @JsonProperty
   var price: Long = priceC
+  @JsonProperty
   var bedrooms: Int = bedroomsC
+  @JsonProperty
   var bathrooms: Int = bathroomsC
+  @JsonProperty
   var sq_ft: Int = sq_ftC
+  @JsonProperty
   var lat: Double = latC
+  @JsonProperty
   var lng: Double = lngC
+
 
 
   def this() = this(0, null, null, 0, 0, 0, 0, 0, 0)
