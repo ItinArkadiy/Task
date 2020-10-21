@@ -17,6 +17,7 @@ case class Flat( idC: Long,
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonProperty
   var id: Int = _
 
   @JsonProperty

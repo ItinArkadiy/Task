@@ -39,16 +39,18 @@ class MyService(flatRepository: FlatRepository) {
     }
   }
 
-  def getFlats(page: Int, pageSize: Int, status: String, max: Long, min: Long): java.util.List[Flat]  = {
+  def getFlats(page: Int, pageSize: Int, status: java.util.List[String], priceMax: Long, priceMin: Long, bedroomsMin: Int, bedroomsMax: Int,
+               bathroomsMin: Int, bathroomsMax: Int): java.util.List[Flat] = {
     val pageable = PageRequest.of(page, pageSize)
-    if (status.length == 0){
-      val pageResult = flatRepository.findByPriceBetween(min, max, pageable)
-      println(pageResult.getContent)
+    if (status.isEmpty) {
+      val pageResult = flatRepository.findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(priceMin, priceMax, bedroomsMin, bedroomsMax, bathroomsMin, bathroomsMax, pageable)
       pageResult.getContent
     } else {
-      val pageResult = flatRepository.findByStatusAndPriceBetween(status, min, max, pageable)
+      val pageResult = flatRepository.findByStatusInAndPriceBetweenAndBedroomsBetweenAndBathroomsBetween(status, priceMin, priceMax, bedroomsMin, bedroomsMax, bathroomsMin, bathroomsMax, pageable)
       pageResult.getContent
     }
   }
+
+
 
 }
