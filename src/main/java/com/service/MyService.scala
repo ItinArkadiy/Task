@@ -29,10 +29,10 @@ class MyService(flatRepository: FlatRepository) {
         lng.toDouble))
       case line => Left(s"Cannot read '$line'")
     }
-    res.foreach(x => flatRepository.save(x match {
-      case Right(x) => x
+    res.map{
+      case Right(x) => flatRepository.save(x)
       case Left(x) => throw new RuntimeException("Download Error")
-    }))
+    }
     "Data downloaded"
   }
 

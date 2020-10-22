@@ -18,7 +18,7 @@ case class Flat ( idC: Long,
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonProperty
-  var id: Int = _
+  var id: Long = idC
 
   @JsonProperty
   var street: String = streetC
