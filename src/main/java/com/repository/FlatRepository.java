@@ -13,11 +13,10 @@ public interface FlatRepository extends JpaRepository<Flat, Long> {
                                                                                   Integer bedroomTo, Integer bathroomFrom,
                                                                                   Integer bathroomTo, Pageable pageable);
 
+
     Page<Flat> findByPriceBetweenAndBedroomsBetweenAndBathroomsBetween(Long priceFrom, Long priceTo, Integer bedroomFrom,
-                                                                       Integer bedroomTo, Integer bathroomFrom,
-                                                                       Integer bathroomTo, Pageable pageable);
-
-
+                                                                               Integer bedroomTo, Integer bathroomFrom,
+                                                                               Integer bathroomTo, Pageable pageable)
 
 
 }
